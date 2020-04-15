@@ -62,6 +62,18 @@ server.put('/:id',(req,res)=>{
     })
 })
 
+//delete
 
+server.delete('/:id',(req,res)=>{
+    db('cars')
+    .where({id: req.params.id})
+    .del(req.body)
+    .then(deletedData => {
+        res.status(200).json({message: deletedData})
+    })
+    .catch( err => {
+        res.status(500).json({error: err.message})
+    })
+})
 
 module.exports = server;
